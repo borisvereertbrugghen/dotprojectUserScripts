@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Dotproject insert data
 // @namespace    http://boris.pearlchain.net/
-// @version      0.1
+// @version      0.2
 // @description  enter something useful
 // @author       Boris
 // @match        http://dotproject.pearlchain.net/index.php?m=timecard*
@@ -19,6 +19,9 @@ function getLastTasks(){
     }
 }
 function setLastTasks(taksString){
+    if(taksString.lastIndexOf(';',0)===0){
+        taksString=taksString.substring(1);
+    }
     $.cookie("dotprojectTamperLastTasks",taksString);
 }
 
