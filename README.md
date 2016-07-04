@@ -1,5 +1,6 @@
 # dotprojectUserScripts
 To make dotproject filling easier
+
 v16.6:
   * List all tasks available for a day on rigth side in a list not left right...
   * allow to directly click the desired hours for each task.
