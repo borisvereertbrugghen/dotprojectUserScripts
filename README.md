@@ -1,6 +1,9 @@
 # dotprojectUserScripts
 To make dotproject filling easier
-
+v16.6:
+  * List all tasks available for a day on rigth side in a list not left right...
+  * allow to directly click the desired hours for each task.
+  
 v15.4:
   * show all collected tasks and allow to remove them from the list (top right)
   * Allow to change the hour of a task directly (autopost on second page)
