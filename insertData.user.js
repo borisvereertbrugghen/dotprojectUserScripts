@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Dotproject insert data
 // @namespace    http://boris.pearlchain.net/
-// @version      15.4
+// @version      16.6
 // @description  enter something useful
 // @author       Boris
 // @match        http://dotproject.pearlchain.net/index.php?m=timecard*
@@ -92,12 +92,12 @@ if(sunday.length){
             var myDay=day.html();
             console.log('found '+myDay);
             if(dayEle!==null && dayTotalHours<8){
-                dayEle.css( "border", "1px solid red" );
+                //dayEle.css( "border", "1px solid red" );
                 var tasks = getLastTasks();
                 console.log(tasks);
                 var ts = tasks.split(";");
                 console.log(ts);
-                var links='';
+                var links='<div  style="width:300px;background: rgba(200, 54, 54, 0.3);border:1px solid red;">';
                 var link = dayEle.parent().parent().find("a").attr("href");
                 for(var i = 0; i < ts.length; i++){
                     var task=ts[i];
@@ -108,14 +108,24 @@ if(sunday.length){
                     var v = task.split('-',4);
                     console.log(tasksInday);
                     if(tasksInday.indexOf(v[2])<0){
-                        links += "<span style='padding-left:20px;'>";
+                        links += '<div style="width:300px">';
                         links += "<a href='"+link+ "&entity="+v[0]+"&pro="+v[1]+"&task="+v[2]+"&hours="+(8-dayTotalHours)+"' >"+v[3]+"</a> ";
-                        links += "<a href='"+link+ "&entity="+v[0]+"&pro="+v[1]+"&task="+v[2]+"&hours="+(8-dayTotalHours)+"&autopost=1' >"+(8-dayTotalHours)+"</a> ";
-                        links += "</span>";
+                        var to=(8-dayTotalHours);
+                        links += '<span style="position:absolute; right:0px;">';
+                        for(var x=1;x<=8;x++){
+                            links += '<span style="width:8px;display:inline-block;">';
+                            if(x<=to){
+                               links += "<a href='"+link+ "&entity="+v[0]+"&pro="+v[1]+"&task="+v[2]+"&hours="+x+"&autopost=1' >"+x+"</a> ";
+                            }
+                            links += "</span >";
+                        }
+                        links += "</span >";
+                        links += "</div>";
                     }
                 }
+                links += "</div>";
                 console.log(links);
-                dayEle.html(dayEle.html()+"<span style='position: absolute;right:15%;font-size:smaller'>"+links+"</span>");
+                dayEle.html(dayEle.html()+"<span style='position: absolute;right:14%;font-size:smaller'>"+links+"</span>");
             }
             if(myDay!='Sunday'&&myDay!='Saturday'){
                 dayEle=day.parent();
