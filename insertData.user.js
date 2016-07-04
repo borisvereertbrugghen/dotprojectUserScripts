@@ -92,12 +92,11 @@ if(sunday.length){
             var myDay=day.html();
             console.log('found '+myDay);
             if(dayEle!==null && dayTotalHours<8){
-                //dayEle.css( "border", "1px solid red" );
                 var tasks = getLastTasks();
                 console.log(tasks);
                 var ts = tasks.split(";");
                 console.log(ts);
-                var links='<div  style="width:300px;background: rgba(200, 54, 54, 0.3);border:1px solid red;">';
+                var links='<div  style="background: rgba(200, 54, 54,0.6);margin-left:250px;padding-left:5px;margin-top:-15px; margin-right:5px;">';
                 var link = dayEle.parent().parent().find("a").attr("href");
                 for(var i = 0; i < ts.length; i++){
                     var task=ts[i];
@@ -108,10 +107,11 @@ if(sunday.length){
                     var v = task.split('-',4);
                     console.log(tasksInday);
                     if(tasksInday.indexOf(v[2])<0){
-                        links += '<div style="width:300px">';
+                        links+= '<div style="width:100%">';
+                        links += '<div style="width:100%;position:relative">';
                         links += "<a href='"+link+ "&entity="+v[0]+"&pro="+v[1]+"&task="+v[2]+"&hours="+(8-dayTotalHours)+"' >"+v[3]+"</a> ";
                         var to=(8-dayTotalHours);
-                        links += '<span style="position:absolute; right:0px;">';
+                        links += '<div style="position: absolute;top:0px;right:10px">';
                         for(var x=1;x<=8;x++){
                             links += '<span style="width:8px;display:inline-block;">';
                             if(x<=to){
@@ -119,13 +119,16 @@ if(sunday.length){
                             }
                             links += "</span >";
                         }
-                        links += "</span >";
+                        links += "</div >";
+                        links += "</div>";
                         links += "</div>";
                     }
                 }
                 links += "</div>";
                 console.log(links);
-                dayEle.html(dayEle.html()+"<span style='position: absolute;right:14%;font-size:smaller'>"+links+"</span>");
+                dayEle.html(dayEle.html()+"<div style='font-size:smaller;'>"+links+"</div>");
+                //dayEle.css("height","50px;");
+                //dayEle.css( "border", "1px solid red" );
             }
             if(myDay!='Sunday'&&myDay!='Saturday'){
                 dayEle=day.parent();
